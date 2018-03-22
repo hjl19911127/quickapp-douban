@@ -47,9 +47,9 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $app_template$ = __webpack_require__(7)
-	var $app_style$ = __webpack_require__(8)
-	var $app_script$ = __webpack_require__(9)
+	var $app_template$ = __webpack_require__(4)
+	var $app_style$ = __webpack_require__(5)
+	var $app_script$ = __webpack_require__(6)
 	
 	$app_define$('@app-component/index', [], function($app_require$, $app_exports$, $app_module$){
 	     $app_script$($app_module$, $app_exports$, $app_require$)
@@ -67,10 +67,7 @@
 /* 1 */,
 /* 2 */,
 /* 3 */,
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */
+/* 4 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -81,35 +78,53 @@
 	  ],
 	  "children": [
 	    {
-	      "type": "text",
+	      "type": "input",
 	      "attr": {
-	        "value": function () {return this.text}
+	        "type": "text",
+	        "placeholder": "输入"
 	      },
 	      "classList": [
 	        "title"
+	      ],
+	      "events": {
+	        "change": "onChange"
+	      }
+	    },
+	    {
+	      "type": "text",
+	      "attr": {
+	        "value": function () {return this.title}
+	      },
+	      "classList": [
+	        "main"
 	      ]
 	    }
 	  ]
 	}
 
 /***/ },
-/* 8 */
+/* 5 */
 /***/ function(module, exports) {
 
 	module.exports = {
 	  ".demo-page": {
 	    "flexDirection": "column",
-	    "justifyContent": "center",
 	    "alignItems": "center"
 	  },
 	  ".title": {
-	    "fontSize": "40px",
-	    "textAlign": "center"
+	    "width": "100%",
+	    "height": "10%",
+	    "backgroundColor": "#00FFFF"
+	  },
+	  ".main": {
+	    "backgroundColor": "#FFFF00",
+	    "width": "100%",
+	    "height": "90%"
 	  }
 	}
 
 /***/ },
-/* 9 */
+/* 6 */
 /***/ function(module, exports) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';
@@ -122,10 +137,11 @@
 	
 	exports.default = {
 	  data: {
-	    text: '欢迎打开详情页'
+	    title: '',
+	    content: ''
 	  },
-	  onMenuPress: function onMenuPress() {
-	    this.$app.showMenu();
+	  onChange: function onChange(e) {
+	    this.title = e.value;
 	  }
 	};
 	

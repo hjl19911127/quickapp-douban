@@ -47,9 +47,9 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $app_template$ = __webpack_require__(4)
-	var $app_style$ = __webpack_require__(5)
-	var $app_script$ = __webpack_require__(6)
+	var $app_template$ = __webpack_require__(7)
+	var $app_style$ = __webpack_require__(8)
+	var $app_script$ = __webpack_require__(9)
 	
 	$app_define$('@app-component/index', [], function($app_require$, $app_exports$, $app_module$){
 	     $app_script$($app_module$, $app_exports$, $app_require$)
@@ -67,7 +67,10 @@
 /* 1 */,
 /* 2 */,
 /* 3 */,
-/* 4 */
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -90,20 +93,20 @@
 	      "type": "input",
 	      "attr": {
 	        "type": "button",
-	        "value": "跳转到详情页"
+	        "value": "记一记"
 	      },
 	      "classList": [
 	        "btn"
 	      ],
 	      "events": {
-	        "click": "routeDetail"
+	        "click": "edit"
 	      }
 	    }
 	  ]
 	}
 
 /***/ },
-/* 5 */
+/* 8 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -128,7 +131,7 @@
 	}
 
 /***/ },
-/* 6 */
+/* 9 */
 /***/ function(module, exports) {
 
 	module.exports = function(module, exports, $app_require$){'use strict';
@@ -147,11 +150,11 @@
 	
 	exports.default = {
 	  data: {
-	    title: '示例页面'
+	    title: '快记事'
 	  },
-	  routeDetail: function routeDetail() {
+	  edit: function edit() {
 	    _system2.default.push({
-	      uri: '/DemoDetail'
+	      uri: '/Edit'
 	    });
 	  }
 	};

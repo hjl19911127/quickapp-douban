@@ -25,12 +25,12 @@
     "logLevel": "off"
   },
   "router": {
-    "entry": "Demo",
+    "entry": "Home",
     "pages": {
-      "Demo": {
+      "Home": {
         "component": "index"
       },
-      "DemoDetail": {
+      "Edit": {
         "component": "index"
       },
       "About": {
@@ -42,14 +42,12 @@
     "titleBarBackgroundColor": "#f2f2f2",
     "titleBarTextColor": "#414141",
     "menu": true,
+    "titleBarText": "快记事",
     "pages": {
-      "Demo": {
-        "titleBarText": "示例页",
+      "Home": {
         "menu": false
       },
-      "DemoDetail": {
-        "titleBarText": "详情页"
-      },
+      "Edit": {},
       "About": {
         "menu": false
       }
