@@ -74,29 +74,44 @@
 	  "type": "div",
 	  "attr": {},
 	  "classList": [
-	    "demo-page"
+	    "edit"
 	  ],
 	  "children": [
 	    {
-	      "type": "input",
-	      "attr": {
-	        "type": "text",
-	        "placeholder": "输入"
-	      },
+	      "type": "div",
+	      "attr": {},
 	      "classList": [
 	        "title"
 	      ],
-	      "events": {
-	        "change": "onChange"
-	      }
+	      "children": [
+	        {
+	          "type": "input",
+	          "attr": {
+	            "type": "text",
+	            "placeholder": "标题"
+	          },
+	          "events": {
+	            "change": "handleTitleChange"
+	          }
+	        }
+	      ]
 	    },
 	    {
-	      "type": "text",
-	      "attr": {
-	        "value": function () {return this.title}
-	      },
+	      "type": "div",
+	      "attr": {},
 	      "classList": [
-	        "main"
+	        "content"
+	      ],
+	      "children": [
+	        {
+	          "type": "textarea",
+	          "attr": {
+	            "placeholder": "内容"
+	          },
+	          "events": {
+	            "change": "handleContentChange"
+	          }
+	        }
 	      ]
 	    }
 	  ]
@@ -107,19 +122,47 @@
 /***/ function(module, exports) {
 
 	module.exports = {
-	  ".demo-page": {
-	    "flexDirection": "column",
-	    "alignItems": "center"
+	  ".edit": {
+	    "flexDirection": "column"
 	  },
 	  ".title": {
-	    "width": "100%",
-	    "height": "10%",
-	    "backgroundColor": "#00FFFF"
+	    "flex": 1,
+	    "paddingTop": "0px",
+	    "paddingRight": "20px",
+	    "paddingBottom": "0px",
+	    "paddingLeft": "20px",
+	    "borderBottomWidth": "1px",
+	    "borderBottomColor": "#999999"
 	  },
-	  ".main": {
-	    "backgroundColor": "#FFFF00",
+	  ".content": {
+	    "flex": 15,
+	    "paddingTop": "0px",
+	    "paddingRight": "20px",
+	    "paddingBottom": "0px",
+	    "paddingLeft": "20px",
+	    "backgroundColor": "#aaaaaa"
+	  },
+	  ".content textarea": {
 	    "width": "100%",
-	    "height": "90%"
+	    "height": "100%",
+	    "_meta": {
+	      "ruleDef": [
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "content"
+	        },
+	        {
+	          "t": "d"
+	        },
+	        {
+	          "t": "t",
+	          "n": "textarea"
+	        }
+	      ]
+	    }
 	  }
 	}
 
@@ -140,8 +183,14 @@
 	    title: '',
 	    content: ''
 	  },
-	  onChange: function onChange(e) {
+	  onMenuPress: function onMenuPress() {
+	    this.$app.showMenu();
+	  },
+	  handleTitleChange: function handleTitleChange(e) {
 	    this.title = e.value;
+	  },
+	  handleContentChange: function handleContentChange(e) {
+	    this.content = e.newText;
 	  }
 	};
 	

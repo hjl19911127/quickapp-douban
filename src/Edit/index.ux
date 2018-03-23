@@ -1,26 +1,36 @@
 <template>
-  <div class="demo-page">
-    <input class="title" type="text" placeholder="输入" onChange="onChange">
-    <text class="main">{{title}}</text>
+  <div class="edit">
+    <div class="title">
+      <input type="text" placeholder="标题" @change="handleTitleChange">
+    </div>
+    <div class="content">
+      <textarea placeholder="内容" @change="handleContentChange"></textarea>
+    </div>
   </div>
 </template>
 
 <style>
-  .demo-page {
+  .edit { 
     flex-direction: column;
-    align-items: center;
   }
 
   .title {
-    width: 100%;
-    height: 10%;
-    background-color: aqua
+    flex: 1;
+    padding: 0 20px;
+    border-bottom-width: 1px;
+    border-bottom-color: #999;
   }
 
-  .main {
-    background-color: yellow;
+  .content {
+    flex: 15;
+    padding: 0 20px;
+    background-color: #aaa;
+
+  }
+
+  .content textarea {
     width: 100%;
-    height: 90%;
+    height: 100%;
   }
 </style>
 
@@ -30,8 +40,14 @@
       title: '',
       content: ''
     },
-    onChange(e) {
+    onMenuPress() {
+      this.$app.showMenu()
+    },
+    handleTitleChange(e) {
       this.title = e.value
+    },
+    handleContentChange(e) {
+      this.content = e.newText
     }
   }
 </script>

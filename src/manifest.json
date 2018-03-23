@@ -25,7 +25,7 @@
     "logLevel": "off"
   },
   "router": {
-    "entry": "Home",
+    "entry": "Edit",
     "pages": {
       "Home": {
         "component": "index"
