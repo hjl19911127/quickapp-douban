@@ -6,11 +6,15 @@
     <div class="content">
       <textarea placeholder="内容" @change="handleContentChange"></textarea>
     </div>
+    <div class="footer">
+      <input type="button" class="btn btn-success" value="保存">
+      <input type="button" class="btn btn-cancel" value="返回">
+    </div>
   </div>
 </template>
 
 <style>
-  .edit { 
+  .edit {
     flex-direction: column;
   }
 
@@ -18,19 +22,40 @@
     flex: 1;
     padding: 0 20px;
     border-bottom-width: 1px;
-    border-bottom-color: #999;
+    border-bottom-color: #e6e6e6;
+  }
+
+  .title input {
+    color: #191919;
   }
 
   .content {
-    flex: 15;
+    flex: 18;
     padding: 0 20px;
-    background-color: #aaa;
 
   }
 
   .content textarea {
     width: 100%;
     height: 100%;
+    color: #636363;
+  }
+
+  .footer {
+    flex: 1;
+  }
+
+  .btn {
+    flex: 1;
+    color: #ffffff;
+  }
+
+  .btn-success {
+    background-color: #09ba07;
+  }
+
+  .btn-cancel {
+    background-color: orange;
   }
 </style>
 

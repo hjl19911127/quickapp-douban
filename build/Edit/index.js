@@ -113,6 +113,37 @@
 	          }
 	        }
 	      ]
+	    },
+	    {
+	      "type": "div",
+	      "attr": {},
+	      "classList": [
+	        "footer"
+	      ],
+	      "children": [
+	        {
+	          "type": "input",
+	          "attr": {
+	            "type": "button",
+	            "value": "保存"
+	          },
+	          "classList": [
+	            "btn",
+	            "btn-success"
+	          ]
+	        },
+	        {
+	          "type": "input",
+	          "attr": {
+	            "type": "button",
+	            "value": "返回"
+	          },
+	          "classList": [
+	            "btn",
+	            "btn-cancel"
+	          ]
+	        }
+	      ]
 	    }
 	  ]
 	}
@@ -132,19 +163,40 @@
 	    "paddingBottom": "0px",
 	    "paddingLeft": "20px",
 	    "borderBottomWidth": "1px",
-	    "borderBottomColor": "#999999"
+	    "borderBottomColor": "#e6e6e6"
+	  },
+	  ".title input": {
+	    "color": "#191919",
+	    "_meta": {
+	      "ruleDef": [
+	        {
+	          "t": "a",
+	          "n": "class",
+	          "i": false,
+	          "a": "element",
+	          "v": "title"
+	        },
+	        {
+	          "t": "d"
+	        },
+	        {
+	          "t": "t",
+	          "n": "input"
+	        }
+	      ]
+	    }
 	  },
 	  ".content": {
-	    "flex": 15,
+	    "flex": 18,
 	    "paddingTop": "0px",
 	    "paddingRight": "20px",
 	    "paddingBottom": "0px",
-	    "paddingLeft": "20px",
-	    "backgroundColor": "#aaaaaa"
+	    "paddingLeft": "20px"
 	  },
 	  ".content textarea": {
 	    "width": "100%",
 	    "height": "100%",
+	    "color": "#636363",
 	    "_meta": {
 	      "ruleDef": [
 	        {
@@ -163,6 +215,19 @@
 	        }
 	      ]
 	    }
+	  },
+	  ".footer": {
+	    "flex": 1
+	  },
+	  ".btn": {
+	    "flex": 1,
+	    "color": "#ffffff"
+	  },
+	  ".btn-success": {
+	    "backgroundColor": "#09ba07"
+	  },
+	  ".btn-cancel": {
+	    "backgroundColor": "#FFA500"
 	  }
 	}
 

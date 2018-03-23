@@ -39,8 +39,8 @@
     }
   },
   "display": {
-    "titleBarBackgroundColor": "#f2f2f2",
-    "titleBarTextColor": "#414141",
+    "titleBarBackgroundColor": "#4d2517",
+    "titleBarTextColor": "#ad9a94",
     "menu": true,
     "titleBarText": "快记事",
     "pages": {
