@@ -76,30 +76,84 @@
 	module.exports = {
 	  "type": "div",
 	  "attr": {},
-	  "classList": [
-	    "demo-page"
-	  ],
 	  "children": [
 	    {
-	      "type": "text",
-	      "attr": {
-	        "value": function () {return '欢迎打开' + (this.title)}
-	      },
+	      "type": "list",
+	      "attr": {},
 	      "classList": [
-	        "title"
+	        "tutorial-page"
+	      ],
+	      "events": {
+	        "scrollbottom": "loadMoreData"
+	      },
+	      "children": [
+	        {
+	          "type": "block",
+	          "attr": {},
+	          "repeat": {
+	            "exp": function () {return this.items},
+	            "key": "index",
+	            "value": "item"
+	          },
+	          "children": [
+	            {
+	              "type": "list-item",
+	              "attr": {
+	                "type": "product"
+	              },
+	              "classList": [
+	                "content-item"
+	              ],
+	              "events": {
+	                "click": function (evt) {this.edit(this.index,evt)}
+	              },
+	              "children": [
+	                {
+	                  "type": "text",
+	                  "attr": {
+	                    "value": function () {return this.item.title}
+	                  }
+	                },
+	                {
+	                  "type": "text",
+	                  "attr": {
+	                    "value": function () {return this.item.content}
+	                  }
+	                }
+	              ]
+	            }
+	          ]
+	        },
+	        {
+	          "type": "list-item",
+	          "attr": {
+	            "type": "loadMore"
+	          },
+	          "classList": [
+	            "load-more"
+	          ],
+	          "children": [
+	            {
+	              "type": "progress",
+	              "attr": {
+	                "type": "circular"
+	              }
+	            },
+	            {
+	              "type": "text",
+	              "attr": {
+	                "value": "加载更多"
+	              }
+	            }
+	          ]
+	        }
 	      ]
 	    },
 	    {
-	      "type": "input",
+	      "type": "a",
 	      "attr": {
-	        "type": "button",
-	        "value": "记一记"
-	      },
-	      "classList": [
-	        "btn"
-	      ],
-	      "events": {
-	        "click": "edit"
+	        "href": "Edit",
+	        "value": "增加"
 	      }
 	    }
 	  ]
@@ -110,23 +164,8 @@
 /***/ function(module, exports) {
 
 	module.exports = {
-	  ".demo-page": {
-	    "flexDirection": "column",
-	    "justifyContent": "center",
-	    "alignItems": "center"
-	  },
-	  ".title": {
-	    "fontSize": "40px",
-	    "textAlign": "center"
-	  },
-	  ".btn": {
-	    "width": "550px",
-	    "height": "86px",
-	    "marginTop": "75px",
-	    "borderRadius": "43px",
-	    "backgroundColor": "#09ba07",
-	    "fontSize": "30px",
-	    "color": "#ffffff"
+	  ".layout": {
+	    "flexDirection": "column"
 	  }
 	}
 
@@ -150,9 +189,15 @@
 	
 	exports.default = {
 	  data: {
-	    title: '快记事'
+	    items: []
 	  },
-	  edit: function edit() {
+	  onShow: function onShow() {
+	    console.log('onShow');
+	    console.log(JSON.stringify(this.$app.$def.data.items));
+	    this.items = this.$app.$def.data.items;
+	  },
+	  loadMoreData: function loadMoreData() {},
+	  edit: function edit(id) {
 	    _system2.default.push({
 	      uri: '/Edit'
 	    });

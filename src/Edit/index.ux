@@ -1,5 +1,5 @@
 <template>
-  <div class="edit">
+  <div class="layout">
     <div class="title">
       <input type="text" placeholder="标题" @change="handleTitleChange">
     </div>
@@ -7,14 +7,14 @@
       <textarea placeholder="内容" @change="handleContentChange"></textarea>
     </div>
     <div class="footer">
-      <input type="button" class="btn btn-success" value="保存">
-      <input type="button" class="btn btn-cancel" value="返回">
+      <input type="button" class="btn btn-success" value="保存" @click="handleSaveClick">
+      <input type="button" class="btn btn-cancel" value="返回" @click="handleCancelClick">
     </div>
   </div>
 </template>
 
 <style>
-  .edit {
+  .layout {
     flex-direction: column;
   }
 
@@ -32,7 +32,6 @@
   .content {
     flex: 18;
     padding: 0 20px;
-
   }
 
   .content textarea {
@@ -60,6 +59,8 @@
 </style>
 
 <script>
+  import router from '@system.router'
+
   export default {
     data: {
       title: '',
@@ -72,7 +73,20 @@
       this.title = e.value
     },
     handleContentChange(e) {
-      this.content = e.newText
+      this.content = e.value
+    },
+    handleSaveClick(e) {
+      let { title, content } = this;
+      this.$app.$def.data.items.push({
+        title,
+        content
+      })
+      this.$app.saveData(this.handleCancelClick);
+    },
+    handleCancelClick(e) {
+      router.push({
+        uri: '/Home'
+      })
     }
   }
 </script>

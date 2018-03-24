@@ -74,7 +74,7 @@
 	  "type": "div",
 	  "attr": {},
 	  "classList": [
-	    "edit"
+	    "layout"
 	  ],
 	  "children": [
 	    {
@@ -130,7 +130,10 @@
 	          "classList": [
 	            "btn",
 	            "btn-success"
-	          ]
+	          ],
+	          "events": {
+	            "click": "handleSaveClick"
+	          }
 	        },
 	        {
 	          "type": "input",
@@ -141,7 +144,10 @@
 	          "classList": [
 	            "btn",
 	            "btn-cancel"
-	          ]
+	          ],
+	          "events": {
+	            "click": "handleCancelClick"
+	          }
 	        }
 	      ]
 	    }
@@ -153,7 +159,7 @@
 /***/ function(module, exports) {
 
 	module.exports = {
-	  ".edit": {
+	  ".layout": {
 	    "flexDirection": "column"
 	  },
 	  ".title": {
@@ -243,6 +249,12 @@
 	
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 	
+	var _system = $app_require$('@app-module/system.router');
+	
+	var _system2 = _interopRequireDefault(_system);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
 	exports.default = {
 	  data: {
 	    title: '',
@@ -255,7 +267,22 @@
 	    this.title = e.value;
 	  },
 	  handleContentChange: function handleContentChange(e) {
-	    this.content = e.newText;
+	    this.content = e.value;
+	  },
+	  handleSaveClick: function handleSaveClick(e) {
+	    var title = this.title,
+	        content = this.content;
+	
+	    this.$app.$def.data.items.push({
+	      title: title,
+	      content: content
+	    });
+	    this.$app.saveData(this.handleCancelClick);
+	  },
+	  handleCancelClick: function handleCancelClick(e) {
+	    _system2.default.push({
+	      uri: '/Home'
+	    });
 	  }
 	};
 	

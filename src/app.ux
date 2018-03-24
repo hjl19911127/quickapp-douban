@@ -2,10 +2,45 @@
   /**
    * 应用级别的配置，供所有页面公用
    */
+  import storage from '@system.storage'
   import util from './util'
 
   export default {
     showMenu: util.showMenu,
-    createShortcut: util.createShortcut
+    createShortcut: util.createShortcut,
+    data: {
+      items: []
+    },
+    saveData(success) {
+      storage.set({
+        key: 'app_data',
+        value: JSON.stringify(this.$def.data.items),
+        success: (data) => {
+          console.log("handling success");
+          success()
+        },
+        fail: (data, code) => {
+          console.log("handling fail, code=" + code);
+        }
+      })
+    },
+    onCreate() {
+      console.info('Application onCreate')
+      storage.get({
+        key: 'app_data',
+        success: (data) => {
+          console.log("handling success");
+          if (data) {
+            this.$def.data.items = JSON.parse(data)
+          }
+        },
+        fail: (data, code) => {
+          console.log("handling fail, code=" + code);
+        }
+      })
+    },
+    onDestroy() {
+      console.info('Application onDestroy')
+    },
   }
 </script>

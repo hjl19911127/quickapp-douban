@@ -22,10 +22,10 @@
     }
   ],
   "config": {
-    "logLevel": "off"
+    "logLevel": "log"
   },
   "router": {
-    "entry": "Edit",
+    "entry": "Home",
     "pages": {
       "Home": {
         "component": "index"

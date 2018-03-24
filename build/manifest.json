@@ -14,6 +14,9 @@
     },
     {
       "name": "system.shortcut"
+    },
+    {
+      "name": "system.storage"
     }
   ],
   "permissions": [
@@ -22,10 +25,10 @@
     }
   ],
   "config": {
-    "logLevel": "off"
+    "logLevel": "log"
   },
   "router": {
-    "entry": "Edit",
+    "entry": "Home",
     "pages": {
       "Home": {
         "component": "index"
