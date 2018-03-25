@@ -76,16 +76,16 @@
 	module.exports = {
 	  "type": "div",
 	  "attr": {},
+	  "classList": [
+	    "layout"
+	  ],
 	  "children": [
 	    {
 	      "type": "list",
 	      "attr": {},
 	      "classList": [
-	        "tutorial-page"
+	        "list"
 	      ],
-	      "events": {
-	        "scrollbottom": "loadMoreData"
-	      },
 	      "children": [
 	        {
 	          "type": "block",
@@ -102,58 +102,56 @@
 	                "type": "product"
 	              },
 	              "classList": [
-	                "content-item"
+	                "list-item"
 	              ],
 	              "events": {
-	                "click": function (evt) {this.edit(this.index,evt)}
+	                "click": function (evt) {this.edit(this.index.toString(),evt)}
 	              },
 	              "children": [
 	                {
 	                  "type": "text",
 	                  "attr": {
 	                    "value": function () {return this.item.title}
-	                  }
+	                  },
+	                  "classList": [
+	                    "title"
+	                  ]
 	                },
 	                {
 	                  "type": "text",
 	                  "attr": {
 	                    "value": function () {return this.item.content}
-	                  }
+	                  },
+	                  "classList": [
+	                    "content"
+	                  ]
+	                },
+	                {
+	                  "type": "text",
+	                  "attr": {
+	                    "value": function () {return this.formatTime(this.item.time)}
+	                  },
+	                  "classList": [
+	                    "time"
+	                  ]
 	                }
 	              ]
-	            }
-	          ]
-	        },
-	        {
-	          "type": "list-item",
-	          "attr": {
-	            "type": "loadMore"
-	          },
-	          "classList": [
-	            "load-more"
-	          ],
-	          "children": [
-	            {
-	              "type": "progress",
-	              "attr": {
-	                "type": "circular"
-	              }
-	            },
-	            {
-	              "type": "text",
-	              "attr": {
-	                "value": "加载更多"
-	              }
 	            }
 	          ]
 	        }
 	      ]
 	    },
 	    {
-	      "type": "a",
+	      "type": "input",
 	      "attr": {
-	        "href": "Edit",
-	        "value": "增加"
+	        "type": "button",
+	        "value": "+"
+	      },
+	      "classList": [
+	        "fixed-btn"
+	      ],
+	      "events": {
+	        "click": function (evt) {this.edit('',evt)}
 	      }
 	    }
 	  ]
@@ -166,6 +164,46 @@
 	module.exports = {
 	  ".layout": {
 	    "flexDirection": "column"
+	  },
+	  ".list": {
+	    "flexDirection": "column"
+	  },
+	  ".list-item": {
+	    "borderTopWidth": "1px",
+	    "borderTopColor": "#eeeeee",
+	    "borderBottomWidth": "1px",
+	    "borderBottomColor": "#dddddd",
+	    "height": "200px",
+	    "flexDirection": "column",
+	    "justifyContent": "center",
+	    "marginBottom": "10px",
+	    "paddingTop": "0px",
+	    "paddingRight": "20px",
+	    "paddingBottom": "0px",
+	    "paddingLeft": "20px"
+	  },
+	  ".title": {
+	    "fontSize": "36px"
+	  },
+	  ".content": {
+	    "fontSize": "20px",
+	    "color": "#aaaaaa",
+	    "marginBottom": "40px"
+	  },
+	  ".time": {
+	    "fontSize": "20px",
+	    "color": "#dddddd"
+	  },
+	  ".fixed-btn": {
+	    "color": "#ffffff",
+	    "fontSize": "50px",
+	    "position": "fixed",
+	    "width": "100px",
+	    "height": "100px",
+	    "right": "40px",
+	    "bottom": "40px",
+	    "borderRadius": "50px",
+	    "backgroundColor": "#519650"
 	  }
 	}
 
@@ -191,16 +229,42 @@
 	  data: {
 	    items: []
 	  },
+	  onMenuPress: function onMenuPress() {
+	    var _this = this;
+	
+	    var prompt = $app_require$('@app-module/system.prompt');
+	    prompt.showContextMenu({
+	      itemList: ['清空数据', '取消'],
+	      success: function success(ret) {
+	        switch (ret.index) {
+	          case 0:
+	            _this.$app.deleteData();
+	            break;
+	          case 1:
+	            break;
+	          default:
+	            prompt.showToast({ message: 'error' });
+	        }
+	      }
+	    });
+	  },
 	  onShow: function onShow() {
 	    console.log('onShow');
-	    console.log(JSON.stringify(this.$app.$def.data.items));
 	    this.items = this.$app.$def.data.items;
 	  },
-	  loadMoreData: function loadMoreData() {},
-	  edit: function edit(id) {
+	  formatTime: function formatTime(time) {
+	    return new Date(time).toJSON().split('.')[0].replace('T', ' ');
+	  },
+	  edit: function edit(index) {
 	    _system2.default.push({
-	      uri: '/Edit'
+	      uri: '/Edit',
+	      params: {
+	        index: index
+	      }
 	    });
+	  },
+	  swipe: function swipe(e) {
+	    console.log(JSON.stringify(e));
 	  }
 	};
 	

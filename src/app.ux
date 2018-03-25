@@ -11,6 +11,17 @@
     data: {
       items: []
     },
+    deleteData() {
+      storage.delete({
+        key: 'app_data',
+        success: (data) => {
+          console.log("handling success");
+        },
+        fail: (data, code) => {
+          console.log("handling fail, code=" + code);
+        }
+      })
+    },
     saveData(success) {
       storage.set({
         key: 'app_data',

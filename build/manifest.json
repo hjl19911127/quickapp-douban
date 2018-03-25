@@ -47,9 +47,7 @@
     "menu": true,
     "titleBarText": "快记事",
     "pages": {
-      "Home": {
-        "menu": false
-      },
+      "Home": {},
       "Edit": {},
       "About": {
         "menu": false

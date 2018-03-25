@@ -78,7 +78,7 @@
 	  value: true
 	});
 	
-	var _stringify = __webpack_require__(12);
+	var _stringify = __webpack_require__(11);
 	
 	var _stringify2 = _interopRequireDefault(_stringify);
 	
@@ -86,7 +86,7 @@
 	
 	var _system2 = _interopRequireDefault(_system);
 	
-	var _util = __webpack_require__(11);
+	var _util = __webpack_require__(14);
 	
 	var _util2 = _interopRequireDefault(_util);
 	
@@ -97,6 +97,17 @@
 	  createShortcut: _util2.default.createShortcut,
 	  data: {
 	    items: []
+	  },
+	  deleteData: function deleteData() {
+	    _system2.default.delete({
+	      key: 'app_data',
+	      success: function success(data) {
+	        console.log("handling success");
+	      },
+	      fail: function fail(data, code) {
+	        console.log("handling fail, code=" + code);
+	      }
+	    });
 	  },
 	  saveData: function saveData(_success) {
 	    _system2.default.set({
@@ -132,11 +143,36 @@
 	    console.info('Application onDestroy');
 	  }
 	};
-	(exports.default || module.exports).manifest = {"package":"com.application.demo","name":"quickapp-douban","versionName":"1.0.0","versionCode":"1","minPlatformVersion":"101","icon":"/Common/logo.png","features":[{"name":"system.prompt"},{"name":"system.router"},{"name":"system.shortcut"}],"permissions":[{"origin":"*"}],"config":{"logLevel":"log"},"router":{"entry":"Home","pages":{"Home":{"component":"index"},"Edit":{"component":"index"},"About":{"component":"index"}}},"display":{"titleBarBackgroundColor":"#4d2517","titleBarTextColor":"#ad9a94","menu":true,"titleBarText":"快记事","pages":{"Home":{"menu":false},"Edit":{},"About":{"menu":false}}}};
+	(exports.default || module.exports).manifest = {"package":"com.application.demo","name":"quickapp-douban","versionName":"1.0.0","versionCode":"1","minPlatformVersion":"101","icon":"/Common/logo.png","features":[{"name":"system.prompt"},{"name":"system.router"},{"name":"system.shortcut"},{"name":"system.storage"}],"permissions":[{"origin":"*"}],"config":{"logLevel":"log"},"router":{"entry":"Home","pages":{"Home":{"component":"index"},"Edit":{"component":"index"},"About":{"component":"index"}}},"display":{"titleBarBackgroundColor":"#4d2517","titleBarTextColor":"#ad9a94","menu":true,"titleBarText":"快记事","pages":{"Home":{},"Edit":{},"About":{"menu":false}}}};
 	}
 
 /***/ },
 /* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(12), __esModule: true };
+
+/***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var core = __webpack_require__(13);
+	var $JSON = core.JSON || (core.JSON = { stringify: JSON.stringify });
+	module.exports = function stringify(it) { // eslint-disable-line no-unused-vars
+	  return $JSON.stringify.apply($JSON, arguments);
+	};
+
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	var core = module.exports = { version: '2.5.3' };
+	if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
+
+
+/***/ },
+/* 14 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -206,31 +242,6 @@
 	  createShortcut: createShortcut
 	};
 
-/***/ },
-/* 12 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(13), __esModule: true };
-
-/***/ },
-/* 13 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var core = __webpack_require__(14);
-	var $JSON = core.JSON || (core.JSON = { stringify: JSON.stringify });
-	module.exports = function stringify(it) { // eslint-disable-line no-unused-vars
-	  return $JSON.stringify.apply($JSON, arguments);
-	};
-
-
-/***/ },
-/* 14 */
-/***/ function(module, exports) {
-
-	var core = module.exports = { version: '2.5.3' };
-	if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
-
-
 /***/ }
 /******/ ]);
   };
@@ -240,7 +251,7 @@
   else {
     window.createAppHandler = createAppHandler
     // H5注入manifest以获取features
-    global.manifest = {"package":"com.application.demo","name":"quickapp-douban","versionName":"1.0.0","versionCode":"1","minPlatformVersion":"101","icon":"/Common/logo.png","features":[{"name":"system.prompt"},{"name":"system.router"},{"name":"system.shortcut"}],"permissions":[{"origin":"*"}],"config":{"logLevel":"log"},"router":{"entry":"Home","pages":{"Home":{"component":"index"},"Edit":{"component":"index"},"About":{"component":"index"}}},"display":{"titleBarBackgroundColor":"#4d2517","titleBarTextColor":"#ad9a94","menu":true,"titleBarText":"快记事","pages":{"Home":{"menu":false},"Edit":{},"About":{"menu":false}}}};
+    global.manifest = {"package":"com.application.demo","name":"quickapp-douban","versionName":"1.0.0","versionCode":"1","minPlatformVersion":"101","icon":"/Common/logo.png","features":[{"name":"system.prompt"},{"name":"system.router"},{"name":"system.shortcut"},{"name":"system.storage"}],"permissions":[{"origin":"*"}],"config":{"logLevel":"log"},"router":{"entry":"Home","pages":{"Home":{"component":"index"},"Edit":{"component":"index"},"About":{"component":"index"}}},"display":{"titleBarBackgroundColor":"#4d2517","titleBarTextColor":"#ad9a94","menu":true,"titleBarText":"快记事","pages":{"Home":{},"Edit":{},"About":{"menu":false}}}};
   }
 })();
 //# sourceMappingURL=app.js.map

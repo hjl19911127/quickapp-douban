@@ -1,10 +1,10 @@
 <template>
   <div class="layout">
     <div class="title">
-      <input type="text" placeholder="标题" @change="handleTitleChange">
+      <input type="text" placeholder="标题" value="{{title}}" @change="handleTitleChange">
     </div>
     <div class="content">
-      <textarea placeholder="内容" @change="handleContentChange"></textarea>
+      <textarea placeholder="内容" @change="handleContentChange">{{content}}</textarea>
     </div>
     <div class="footer">
       <input type="button" class="btn btn-success" value="保存" @click="handleSaveClick">
@@ -19,7 +19,8 @@
   }
 
   .title {
-    flex: 1;
+    width: 100%;
+    height: 10%;
     padding: 0 20px;
     border-bottom-width: 1px;
     border-bottom-color: #e6e6e6;
@@ -30,8 +31,8 @@
   }
 
   .content {
-    flex: 18;
-    padding: 0 20px;
+    height: 92%;
+    padding: 20px;
   }
 
   .content textarea {
@@ -41,7 +42,7 @@
   }
 
   .footer {
-    flex: 1;
+    height: 8%;
   }
 
   .btn {
@@ -50,11 +51,11 @@
   }
 
   .btn-success {
-    background-color: #09ba07;
+    background-color: #519650;
   }
 
   .btn-cancel {
-    background-color: orange;
+    background-color: #FFA500;
   }
 </style>
 
@@ -64,7 +65,15 @@
   export default {
     data: {
       title: '',
-      content: ''
+      content: '',
+      index: ''
+    },
+    onShow() {
+      if (this.index) {
+        let { title, content } = this.$app.$def.data.items[this.index]
+        this.title = title;
+        this.content = content;
+      }
     },
     onMenuPress() {
       this.$app.showMenu()
@@ -76,17 +85,21 @@
       this.content = e.value
     },
     handleSaveClick(e) {
-      let { title, content } = this;
-      this.$app.$def.data.items.push({
+      let { title, content } = this, items = this.$app.$def.data.items;
+      let data = {
         title,
-        content
-      })
+        content,
+        time: +new Date()
+      }
+      if (this.index) {
+        items.splice(+this.index, 1, data)
+      } else {
+        items.push(data)
+      }
       this.$app.saveData(this.handleCancelClick);
     },
     handleCancelClick(e) {
-      router.push({
-        uri: '/Home'
-      })
+      router.back()
     }
   }
 </script>

@@ -88,7 +88,8 @@
 	          "type": "input",
 	          "attr": {
 	            "type": "text",
-	            "placeholder": "标题"
+	            "placeholder": "标题",
+	            "value": function () {return this.title}
 	          },
 	          "events": {
 	            "change": "handleTitleChange"
@@ -106,7 +107,8 @@
 	        {
 	          "type": "textarea",
 	          "attr": {
-	            "placeholder": "内容"
+	            "placeholder": "内容",
+	            "value": function () {return this.content}
 	          },
 	          "events": {
 	            "change": "handleContentChange"
@@ -163,7 +165,8 @@
 	    "flexDirection": "column"
 	  },
 	  ".title": {
-	    "flex": 1,
+	    "width": "100%",
+	    "height": "10%",
 	    "paddingTop": "0px",
 	    "paddingRight": "20px",
 	    "paddingBottom": "0px",
@@ -193,10 +196,10 @@
 	    }
 	  },
 	  ".content": {
-	    "flex": 18,
-	    "paddingTop": "0px",
+	    "height": "92%",
+	    "paddingTop": "20px",
 	    "paddingRight": "20px",
-	    "paddingBottom": "0px",
+	    "paddingBottom": "20px",
 	    "paddingLeft": "20px"
 	  },
 	  ".content textarea": {
@@ -223,14 +226,14 @@
 	    }
 	  },
 	  ".footer": {
-	    "flex": 1
+	    "height": "8%"
 	  },
 	  ".btn": {
 	    "flex": 1,
 	    "color": "#ffffff"
 	  },
 	  ".btn-success": {
-	    "backgroundColor": "#09ba07"
+	    "backgroundColor": "#519650"
 	  },
 	  ".btn-cancel": {
 	    "backgroundColor": "#FFA500"
@@ -258,7 +261,18 @@
 	exports.default = {
 	  data: {
 	    title: '',
-	    content: ''
+	    content: '',
+	    index: ''
+	  },
+	  onShow: function onShow() {
+	    if (this.index) {
+	      var _$app$$def$data$items = this.$app.$def.data.items[this.index],
+	          title = _$app$$def$data$items.title,
+	          content = _$app$$def$data$items.content;
+	
+	      this.title = title;
+	      this.content = content;
+	    }
 	  },
 	  onMenuPress: function onMenuPress() {
 	    this.$app.showMenu();
@@ -271,18 +285,23 @@
 	  },
 	  handleSaveClick: function handleSaveClick(e) {
 	    var title = this.title,
-	        content = this.content;
+	        content = this.content,
+	        items = this.$app.$def.data.items;
 	
-	    this.$app.$def.data.items.push({
+	    var data = {
 	      title: title,
-	      content: content
-	    });
+	      content: content,
+	      time: +new Date()
+	    };
+	    if (this.index) {
+	      items.splice(+this.index, 1, data);
+	    } else {
+	      items.push(data);
+	    }
 	    this.$app.saveData(this.handleCancelClick);
 	  },
 	  handleCancelClick: function handleCancelClick(e) {
-	    _system2.default.push({
-	      uri: '/Home'
-	    });
+	    _system2.default.back();
 	  }
 	};
 	
